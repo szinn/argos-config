@@ -3,7 +3,6 @@
 {
   imports = [
     ../modules/specialization/plasma.nix
-    ../modules/specialization/i3.nix
     ../modules/specialization/gnome-ibus.nix
   ];
 

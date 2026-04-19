@@ -18,10 +18,6 @@
     # mostly for testing.
     nixpkgs-master.url = "github:nixos/nixpkgs";
 
-    # Build a custom WSL installer
-    # nixos-wsl.url = "github:nix-community/NixOS-WSL";
-    # nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
-
     # snapd
     nix-snapd.url = "github:nix-community/nix-snapd";
     nix-snapd.inputs.nixpkgs.follows = "nixpkgs";
@@ -49,17 +45,10 @@
     # Other packages
     jujutsu.url = "github:martinvonz/jj";
     zig.url = "github:mitchellh/zig-overlay";
-
-    # Non-flakes
-    theme-bobthefish.url = "github:oh-my-fish/theme-bobthefish/e3b4d4eafc23516e35f162686f08a42edf844e40";
-    theme-bobthefish.flake = false;
-    fish-fzf.url = "github:jethrokuan/fzf/24f4739fc1dffafcc0da3ccfbbd14d9c7d31827a";
-    fish-fzf.flake = false;
-    fish-foreign-env.url = "github:oh-my-fish/plugin-foreign-env/dddd9213272a0ab848d474d0cbde12ad034e65bc";
-    fish-foreign-env.flake = false;
+    bacon-ls.url = "github:crisidev/bacon-ls";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
+  outputs = { self, nixpkgs, home-manager, bacon-ls, ... }@inputs: let
     # Overlays is the list of overlays we want to apply from flake inputs.
     overlays = [
       inputs.jujutsu.overlays.default
@@ -70,7 +59,7 @@
         gh = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.gh;
 
         # Want the latest version of these
-        # claude-code = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.claude-code;
+        claude-code = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.claude-code;
         # nushell = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.nushell;
 
         ibus = ibus_stable;
@@ -88,32 +77,5 @@
       system = "aarch64-linux";
       user   = "scotte";
     };
-
-    # nixosConfigurations.vm-aarch64-prl = mkSystem "vm-aarch64-prl" rec {
-    #   system = "aarch64-linux";
-    #   user   = "mitchellh";
-    # };
-    #
-    # nixosConfigurations.vm-aarch64-utm = mkSystem "vm-aarch64-utm" rec {
-    #   system = "aarch64-linux";
-    #   user   = "mitchellh";
-    # };
-    #
-    # nixosConfigurations.vm-intel = mkSystem "vm-intel" rec {
-    #   system = "x86_64-linux";
-    #   user   = "mitchellh";
-    # };
-    #
-    # nixosConfigurations.wsl = mkSystem "wsl" {
-    #   system = "x86_64-linux";
-    #   user   = "mitchellh";
-    #   wsl    = true;
-    # };
-    #
-    # darwinConfigurations.macbook-pro-m1 = mkSystem "macbook-pro-m1" {
-    #   system = "aarch64-darwin";
-    #   user   = "mitchellh";
-    #   darwin = true;
-    # };
   };
 }
