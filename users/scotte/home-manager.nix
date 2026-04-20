@@ -33,6 +33,7 @@ in {
   # not a huge list.
   home.packages = [
     pkgs._1password-cli
+    pkgs.argc
     pkgs.atuin
     pkgs.bat
     pkgs.bacon
@@ -50,6 +51,7 @@ in {
     pkgs.git
     pkgs.go
     pkgs.gopls
+    pkgs.gum
     pkgs.htop
     pkgs.jq
     pkgs.nettools
@@ -57,8 +59,10 @@ in {
     pkgs.ripgrep
     pkgs.rofi
     pkgs.rust-analyzer
+    pkgs.sesh
     pkgs.sops
     pkgs.starship
+    pkgs.tmux
     pkgs.tree
     pkgs.watch
     pkgs.vscode-langservers-extracted
