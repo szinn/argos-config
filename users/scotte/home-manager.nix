@@ -4,7 +4,6 @@
 
 let
   sources = import ../../nix/sources.nix;
-  isLinux = pkgs.stdenv.isLinux;
 
   # For our MANPAGER env var
   # https://github.com/sharkdp/bat/issues/1145
@@ -107,7 +106,7 @@ in {
   };
 
   services.gpg-agent = {
-    enable = isLinux;
+    enable = true;
     pinentry.package = pkgs.pinentry-tty;
 
     # cache the keys forever so we don't get asked for a password
@@ -118,7 +117,7 @@ in {
   xresources.extraConfig = builtins.readFile ./Xresources;
 
   # Make cursor not tiny on HiDPI screens
-  home.pointerCursor = lib.mkIf isLinux {
+  home.pointerCursor = lib.mkIf true {
     name = "Vanilla-DMZ";
     package = pkgs.vanilla-dmz;
     size = 128;

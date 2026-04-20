@@ -30,11 +30,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # darwin = {
-    #   url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     # I think technically you're not supposed to override the nixpkgs
     # used by neovim but recently I had failures if I didn't pin to my
     # own. We can always try to remove that anytime.
@@ -48,7 +43,7 @@
     bacon-ls.url = "github:crisidev/bacon-ls";
   };
 
-  outputs = { self, nixpkgs, home-manager, bacon-ls, ... }@inputs: let
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
     # Overlays is the list of overlays we want to apply from flake inputs.
     overlays = [
       inputs.jujutsu.overlays.default
