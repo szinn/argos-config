@@ -59,22 +59,22 @@
   # Select internationalisation properties.
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    inputMethod = {
-      enable = true;
-      type = "fcitx5";
-      fcitx5.addons = with pkgs; [
-        qt6Packages.fcitx5-chinese-addons
-        fcitx5-gtk
-        fcitx5-hangul
-        fcitx5-mozc
-      ];
-    };
+    # inputMethod = {
+    #   enable = true;
+    #   type = "fcitx5";
+    #   fcitx5.addons = with pkgs; [
+    #     qt6Packages.fcitx5-chinese-addons
+    #     fcitx5-gtk
+    #     fcitx5-hangul
+    #     fcitx5-mozc
+    #   ];
+    # };
   };
 
   # Enable tailscale. We manually authenticate when we want with
   # "sudo tailscale up". If you don't use tailscale, you should comment
   # out or delete all of this.
-  services.tailscale.enable = true;
+  # services.tailscale.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
