@@ -21,6 +21,7 @@
     # this, use your own, or toss it. Its typically safe to use a binary cache
     # since the data inside is checksummed.
     settings = {
+      trusted-users = [ "scotte" ];
       substituters = ["https://szinn.cachix.org"];
       trusted-public-keys = ["szinn.cachix.org-1:9gbZrHCd1BYMUuMCinvG2fTu98Jubp8y8tLE3jipABM="];
     };
