@@ -84,6 +84,10 @@ in {
 
   xdg.configFile = {
     "rofi/config.rasi".text = builtins.readFile ./rofi;
+    "fish/functions/fisher.fish".source = pkgs.fetchurl {
+      url = "https://git.io/fisher";
+      sha256 = "sha256-D7bIGuMAPpW1Zxdm+mwlw1lwZuKZZbd3L2wbAHOHNW0="; # Replace with actual hash
+    };
   };
 
   #---------------------------------------------------------------------
