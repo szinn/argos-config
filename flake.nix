@@ -23,10 +23,7 @@
     nix-snapd.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager = {
-      # We need to use nightly home-manager because it contains this
-      # fix we need for nushell nightly:
-      # https://github.com/nix-community/home-manager/commit/a69ebd97025969679de9f930958accbe39b4c705
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -50,17 +47,20 @@
       inputs.zig.overlays.default
 
       (final: prev: rec {
+        # xrdb was removed as a top-level package; it now lives under xorg.
+        xrdb = final.xorg.xrdb;
+
         # gh CLI on stable has bugs.
-        gh = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.gh;
+        gh = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.gh;
 
         # Want the latest version of these
-        claude-code = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.claude-code;
-        # nushell = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.nushell;
+        claude-code = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.claude-code;
+        # nushell = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.nushell;
 
         ibus = ibus_stable;
-        ibus_stable = inputs.nixpkgs.legacyPackages.${prev.system}.ibus;
-        ibus_1_5_29 = inputs.nixpkgs-old-ibus.legacyPackages.${prev.system}.ibus;
-        ibus_1_5_31 = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.ibus;
+        ibus_stable = inputs.nixpkgs.legacyPackages.${prev.stdenv.hostPlatform.system}.ibus;
+        ibus_1_5_29 = inputs.nixpkgs-old-ibus.legacyPackages.${prev.stdenv.hostPlatform.system}.ibus;
+        ibus_1_5_31 = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.ibus;
       })
     ];
 

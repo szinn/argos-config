@@ -36,7 +36,7 @@ in {
     pkgs.atuin
     pkgs.bat
     pkgs.bacon
-    inputs.bacon-ls.defaultPackage.${pkgs.system}
+    inputs.bacon-ls.defaultPackage.${pkgs.stdenv.hostPlatform.system}
     pkgs.chezmoi
     pkgs.clang
     pkgs.claude-code
@@ -106,7 +106,7 @@ in {
 
   programs.neovim = {
     enable = true;
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
   };
 
   services.gpg-agent = {
