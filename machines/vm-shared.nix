@@ -56,6 +56,7 @@
 
   # Virtualization settings
   virtualisation.docker.enable = true;
+  virtualisation.docker.package = pkgs.docker_29;
 
   # Select internationalisation properties.
   i18n = {
