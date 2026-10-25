@@ -43,7 +43,6 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs: let
     # Overlays is the list of overlays we want to apply from flake inputs.
     overlays = [
-      inputs.jujutsu.overlays.default
       inputs.zig.overlays.default
 
       (final: prev: rec {
@@ -52,6 +51,11 @@
 
         # gh CLI on stable has bugs.
         gh = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.gh;
+
+        # jj's overlay builds against the ambient (stable) rustc, but jj-cli
+        # now requires a newer rustc than nixpkgs stable ships. Use jj's own
+        # `packages.default`, which pins a sufficient rustc via rust-overlay.
+        jujutsu = inputs.jujutsu.packages.${prev.stdenv.hostPlatform.system}.default;
 
         # Want the latest version of these
         claude-code = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.claude-code;
